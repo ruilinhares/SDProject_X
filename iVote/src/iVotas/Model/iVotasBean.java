@@ -2,9 +2,10 @@ package iVotas.Model;
 
 import RMI.RMIinterface;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
@@ -14,10 +15,10 @@ public class iVotasBean extends UnicastRemoteObject {
 
     private RMIinterface serverRMI;
     private String username;
+    private String password;
 
     public iVotasBean() throws RemoteException {
         this.ligarRMI();
-        this.username = null;
     }
 
     private void ligarRMI(){
@@ -25,12 +26,26 @@ public class iVotasBean extends UnicastRemoteObject {
         while(!ver){
             try {
                 // TODO: Make lookup dynamic
-                this.serverRMI = (RMIinterface) LocateRegistry.getRegistry(6789).lookup("HelloRMI");
+                this.serverRMI = (RMIinterface) Naming.lookup("HelloRMI");
                 ver = true;
             } catch (RemoteException | NotBoundException e) {
                 System.out.println("Primary is now down.");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
             }
         }
+    }
+
+    public boolean userLogin() throws RemoteException {
+        return serverRMI.userLogin(this.username,this.password);
+    }
+
+    public boolean logged(String user) throws RemoteException {
+        return serverRMI.logged(user);
+    }
+
+    public ArrayList<String> getAllUsers() throws RemoteException {
+        return serverRMI.getAllUsers(); // are you going to throw all exceptions?
     }
 
     public RMIinterface getServerRMI() {
@@ -55,25 +70,11 @@ public class iVotasBean extends UnicastRemoteObject {
         }
     }
 
-    /*
-    public ArrayList<String> getNotificacoes() {
-        while(true) {
-            try{
-                return this.serverRMI.getNotificacoes(this.username);
-            } catch(RemoteException re) {
-                this.ligarRMI();
-            }
-        }
-    }*/
+    public String getPassword() {
+        return password;
+    }
 
-    /*
-    public boolean connectToFacebook(String code) {
-        while(true) {
-            try {
-                return this.serverRMI.connectToFacebook(this.username, code);
-            } catch(RemoteException re) {
-                this.ligarRMI();
-            }
-        }
-    }*/
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

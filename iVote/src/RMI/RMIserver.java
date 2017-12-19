@@ -3,6 +3,7 @@ import java.io.*;
 import RMI.src.Classes.*;
 import RMI.src.TCP.*;
 
+import javax.swing.text.StyledEditorKit;
 import java.net.*;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
@@ -21,12 +22,14 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
     private ArrayList<Pessoa> listaPessoas;
     private ArrayList<TCPServer> mesasVotos;
     private Map<String,String> users;
-    private Set<String> onlineUsers;
+    private ArrayList<String> onlineUsers;
 
     private RMIserver() throws RemoteException {
         super();
         this.users = new HashMap<String, String>();
-        this.onlineUsers = new CopyOnWriteArraySet<>();
+        this.users.put("ze","123");
+        this.users.put("rui","rui");
+        this.onlineUsers = new ArrayList<>();
         this.listaEleicoes = new ArrayList<>();
         this.listaDepartamentos = new ArrayList<>();
         this.listaPessoas = new ArrayList<>();
@@ -44,22 +47,23 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         return ret;
     }*/
 //#############################################################################
-    public boolean userLogin(String name, String password) throws RemoteException {
-        Set<String> auxUsers = users.keySet();
-        for (String aux : auxUsers)
-            if (aux.equals(name.toUpperCase()) && users.get(name).equals(password)){
-                String message = "{\"type\" : \"userLogin\", \"username\" : \"" + name + "\"}";
-                this.onlineUsers.add(name);
-                //ArrayList<String> users = this.onlineUsers(name);
-                //this.sendMessages(0, users, message);
-                return true;
-            }
-            return false;
+    public boolean userLogin(String user, String password) throws RemoteException {
+        System.out.println("Looking up " + user + "...");
+        Boolean res = false;
+        res = users.containsKey(user) && users.get(user).equals(password);
+        if (res)
+            onlineUsers.add(user);
+        return res;
     }
 
+    public boolean logged(String user) throws RemoteException {
+        return !onlineUsers.contains(user);
+    }
 
-
-
+    public ArrayList<String> getAllUsers() throws RemoteException {
+        System.out.println("Looking up all users...");
+        return new ArrayList<String>(users.keySet());
+    }
 
 //#############################################################################
     synchronized public ArrayList<Eleicao> getListaEleicoes()  {

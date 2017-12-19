@@ -1,27 +1,31 @@
 package iVotas.Action;
 
-import java.util.ArrayList;
+import com.opensymphony.xwork2.ActionSupport;
+import iVotas.Model.iVotasBean;
+import org.apache.struts2.interceptor.SessionAware;
+
+import java.rmi.RemoteException;
 import java.util.Map;
 
-public class LoginAction extends Action {
+public class LoginAction extends ActionSupport implements SessionAware {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
-
     private String username = null;
     private String password = null;
 
-
-    public String execute() {
+    @Override
+    public String execute() throws RemoteException {
         if (this.username != null && this.password != null && !this.username.equals("") && !this.password.equals("")) {
-            if (this.getiVotasBean().login(this.username, this.password)) {
+            if (this.getiVotasBean().logged(this.username)) {
                 this.getiVotasBean().setUsername(this.username);
-                this.setiVotasBean(getiVotasBean());
-                //this.session.put("username", this.username);
-                //this.session.put("loggedin", true);
+                this.getiVotasBean().setUsername(this.password);
+                //this.setiVotasBean(getiVotasBean());
+                this.session.put("username", this.username);
+                this.session.put("loggedin", true);
                 return SUCCESS;
             } else if(this.username.equals("admin") && this.password.equals("admin")){
-                return "administration";
+                return "administrador";
             }
 
         }
@@ -42,6 +46,16 @@ public class LoginAction extends Action {
 
     public String getPassword() {
         return password;
+    }
+
+    public iVotasBean getiVotasBean() throws RemoteException {
+        if(!session.containsKey("iVotasBean"))
+            this.setiVotasBean(new iVotasBean());
+        return (iVotasBean) session.get("iVotasBean");
+    }
+
+    public void setiVotasBean(iVotasBean bean) {
+        this.session.put("iVotasBean", bean);
     }
 
     @Override

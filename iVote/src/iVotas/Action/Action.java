@@ -12,7 +12,7 @@ public class Action extends ActionSupport implements Serializable {
     private static final long serialVersionUID = 1L;
     private Map<String, Object> session;
 
-    public iVotasBean getiVotasBean() {
+    public iVotasBean getiVotasBean() throws RemoteException {
         boolean ver = false;
         if (!session.containsKey("iVotasBean")) {
             while(!ver){
