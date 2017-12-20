@@ -118,6 +118,13 @@
         <label><b>Tipo (Estudante,Docente ou Funcionario):</b></label>
         <s:textfield name="tipo" />
         <button type="submit">Registar</button>
+        <script type="text/javascript">
+            function showResult() {
+                alert("Here it comes ");
+                var result = "<s:property value='key1'/>";
+                alert("Before Display");
+            }
+        </script>
         <form action="cancelar">
             <button>Cancelar</button>
         </form>

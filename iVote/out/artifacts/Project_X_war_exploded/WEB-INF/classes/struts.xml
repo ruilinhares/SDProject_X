@@ -46,12 +46,21 @@
             <result>/pages/registar.jsp</result>
         </action>
 
+        <action name="button2">
+            <result>/pages/gerirDep.jsp</result>
+        </action>
+
         <!-- 'registar' action calls 'execute' in 'RegistarAction' -->
         <action name="registar" class="iVotas.Action.RegistarAction" method="execute">
             <result name="success">/hey.jsp</result>
             <result name="login">/pages/error.jsp</result>
         </action>
 
+        <!-- 'gerirDep' action calls 'execute' in 'DepartamentoAction' -->
+        <action name="departamento" class="iVotas.Action.DepartamentoAction" method="execute">
+            <result name="success">/hey.jsp</result>
+            <result name="login">/pages/error.jsp</result>
+        </action>
 
     </package>
 </struts>

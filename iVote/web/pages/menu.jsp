@@ -99,10 +99,11 @@
 
     <h2>Consola de Administrador</h2>
     <div class="container">
-        <form action="button1">
+        <form></form>
+        <form action="button1.action">
             <button>1.Registar Pessoa</button>
         </form>
-        <form action="button1">
+        <form action="button2.action">
             <button>2.Gerir Departamentos</button>
         </form>
         <form action="b1">

@@ -87,4 +87,40 @@ public class iVotasBean extends UnicastRemoteObject {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean criaDep(String nomeDep){
+        ArrayList<Departamento> departamentos = null;
+        try {
+            departamentos = this.serverRMI.getListaDepartamentos();
+            for (Departamento auxDep : departamentos)
+                if ((nomeDep.toUpperCase()).equals(auxDep.getNome().toUpperCase())){
+                    System.out.println("Departamento ja existente!");
+                    return false;
+                }
+            Departamento dep = new Departamento(nomeDep,new ArrayList<>());
+
+            this.serverRMI.addDepartamento(dep);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean apagaDep(String nomeDep){
+        ArrayList<Departamento> departamentos = null;
+        try {
+            departamentos = this.serverRMI.getListaDepartamentos();
+            int i = 0;
+            for (Departamento auxDep : departamentos) {
+                if ((nomeDep.toUpperCase()).equals(auxDep.getNome().toUpperCase())) {
+                    this.serverRMI.RemoveDepartamento(i);
+                    return true;
+                }
+                i++;
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

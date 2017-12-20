@@ -87,6 +87,8 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
 
     synchronized public  void addDepartamento(Departamento dep){
         this.listaDepartamentos.add(dep);
+        store();
+
     }
 
 
@@ -117,7 +119,6 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
 
     synchronized public void AddDepartamento(Departamento dep){
         this.listaDepartamentos.add(dep);
-        store();
 
     }
     // Ponto 1 - REGISTAR PESSOA
