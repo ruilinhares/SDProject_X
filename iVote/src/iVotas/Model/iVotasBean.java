@@ -1,9 +1,9 @@
 package iVotas.Model;
 
 import RMI.RMIinterface;
+import RMI.src.Classes.Departamento;
+import RMI.src.Classes.Pessoa;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -45,6 +45,17 @@ public class iVotasBean extends UnicastRemoteObject {
 
     public ArrayList<String> getAllUsers() throws RemoteException {
         return serverRMI.getAllUsers(); // are you going to throw all exceptions?
+    }
+
+    public Departamento getDepartamento(String dep) throws RemoteException {
+        return serverRMI.getDepartamento(dep);
+    }
+
+    public boolean registarPessoa(Pessoa pessoa) throws RemoteException {
+        boolean res = serverRMI.registarPessoa(pessoa);
+        if (res)
+            serverRMI.addUser(pessoa.getNome(),pessoa.getPassword());
+        return res;
     }
 
     public RMIinterface getServerRMI() {

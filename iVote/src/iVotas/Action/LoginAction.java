@@ -7,7 +7,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.rmi.RemoteException;
 import java.util.Map;
 
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginAction extends Action {
 
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
@@ -16,12 +16,10 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() throws RemoteException {
-        System.out.println(username+"|"+password);
         if (this.username != null && this.password != null && !this.username.equals("") && !this.password.equals("")) {
-            System.out.println(this.getiVotasBean().logged(this.username));
-            if (this.getiVotasBean().logged(this.username)) {
-                this.getiVotasBean().setUsername(this.username);
-                this.getiVotasBean().setPassword(this.password);
+            this.getiVotasBean().setUsername(this.username);
+            this.getiVotasBean().setPassword(this.password);
+            if (this.getiVotasBean().userLogin()) {
                 this.session.put("username", this.username);
                 this.session.put("loggedin", true);
                 return SUCCESS;
@@ -46,20 +44,5 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
     public String getPassword() {
         return password;
-    }
-
-    public iVotasBean getiVotasBean() throws RemoteException {
-        if(!session.containsKey("iVotasBean"))
-            this.setiVotasBean(new iVotasBean());
-        return (iVotasBean) session.get("iVotasBean");
-    }
-
-    public void setiVotasBean(iVotasBean bean) {
-        this.session.put("iVotasBean", bean);
-    }
-
-    @Override
-    public void setSession(Map<String, Object> session) {
-        this.session = session;
     }
 }

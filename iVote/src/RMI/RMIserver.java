@@ -30,6 +30,7 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         this.onlineUsers = new ArrayList<>();
         this.listaEleicoes = new ArrayList<>();
         this.listaDepartamentos = new ArrayList<>();
+        listaDepartamentos.add(new Departamento("dei",new ArrayList<>()));
         this.listaPessoas = new ArrayList<>();
         this.mesasVotos = new ArrayList<>();
         //start();
@@ -56,6 +57,10 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
 
     public boolean logged(String user) throws RemoteException {
         return !onlineUsers.contains(user);
+    }
+
+    public void addUser(String user, String pass) throws RemoteException {
+        this.users.put(user, pass);
     }
 
     public ArrayList<String> getAllUsers() throws RemoteException {

@@ -2,36 +2,28 @@ package iVotas.Action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import iVotas.Model.iVotasBean;
+import org.apache.struts2.interceptor.SessionAware;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.Map;
 
-public class Action extends ActionSupport implements Serializable {
+public class Action extends ActionSupport implements SessionAware {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
 
     public iVotasBean getiVotasBean() throws RemoteException {
-        boolean ver = false;
-        if (!session.containsKey("iVotasBean")) {
-            while(!ver){
-                try {
-                    this.setiVotasBean(new iVotasBean());
-                    ver = true;
-                } catch (RemoteException re){
-                    System.out.println("Could not create a new iBeiBean");
-                }
-            }
-        }
+        if(!session.containsKey("iVotasBean"))
+            this.setiVotasBean(new iVotasBean());
         return (iVotasBean) session.get("iVotasBean");
     }
 
-    public void setSession(Map<String, Object> session){
-        this.session = session;
+    public void setiVotasBean(iVotasBean bean) {
+        this.session.put("iVotasBean", bean);
     }
 
-    public void setiVotasBean(iVotasBean iV){
-        this.session.put("iVotasBean",iV);
+    @Override
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
 }
