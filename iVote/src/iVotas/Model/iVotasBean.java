@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
@@ -26,12 +27,10 @@ public class iVotasBean extends UnicastRemoteObject {
         while(!ver){
             try {
                 // TODO: Make lookup dynamic
-                this.serverRMI = (RMIinterface) Naming.lookup("HelloRMI");
+                this.serverRMI = (RMIinterface) LocateRegistry.getRegistry(6789).lookup("HelloRMI");
                 ver = true;
             } catch (RemoteException | NotBoundException e) {
                 System.out.println("Primary is now down.");
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             }
         }
     }

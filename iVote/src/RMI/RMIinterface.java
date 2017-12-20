@@ -10,4 +10,6 @@ public interface RMIinterface extends Remote {
     boolean logged(String user) throws RemoteException;
     boolean userLogin(String name, String password) throws RemoteException;
     ArrayList<String> getAllUsers() throws RemoteException;
+
+    void sayHello() throws RemoteException;
 }

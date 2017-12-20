@@ -16,18 +16,18 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() throws RemoteException {
+        System.out.println(username+"|"+password);
         if (this.username != null && this.password != null && !this.username.equals("") && !this.password.equals("")) {
+            System.out.println(this.getiVotasBean().logged(this.username));
             if (this.getiVotasBean().logged(this.username)) {
                 this.getiVotasBean().setUsername(this.username);
-                this.getiVotasBean().setUsername(this.password);
-                //this.setiVotasBean(getiVotasBean());
+                this.getiVotasBean().setPassword(this.password);
                 this.session.put("username", this.username);
                 this.session.put("loggedin", true);
                 return SUCCESS;
             } else if(this.username.equals("admin") && this.password.equals("admin")){
                 return "administrador";
             }
-
         }
         return LOGIN;
     }

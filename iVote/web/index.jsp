@@ -10,14 +10,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-  <title>Hey!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>iVotas</title>
+    <link rel="stylesheet" href="CSS/style.css" />
 </head>
 <body>
-    <s:form action="login" method="post">
-      <s:text name="Username:" />
-      <s:textfield name="username" /><br>
-      <s:submit />
-    </s:form>
+    <form action="login" method="post">
+        <div class="imgcontainer">
+            <img src="assets/image.png" >
+        </div>
+
+        <div class="container">
+            <label><b>Username</b></label>
+            <s:textfield name="username" />
+
+            <label><b>Password</b></label>
+            <s:textfield name="password" />
+
+            <button type="submit" value="login">Login</button>
+            <label><b>Ou</b></label>
+            <button id="face">Login with Facebook</button>
+        </div>
+    </form>
 </body>
 </html>

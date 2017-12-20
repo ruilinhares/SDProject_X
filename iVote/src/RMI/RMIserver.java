@@ -3,16 +3,14 @@ import java.io.*;
 import RMI.src.Classes.*;
 import RMI.src.TCP.*;
 
-import javax.swing.text.StyledEditorKit;
 import java.net.*;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.*;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArraySet;
 
-public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements, TCPserverRMIimplements {
+public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements, TCPserverRMIimplements, RMIinterface {
     /**
      *
      */
@@ -340,6 +338,7 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
 
 // =========================================================
     public static void main(String args[]) throws RemoteException {
+
         RMIserver rmiServer = null;
         try {
             Registry rmiRegistry = LocateRegistry.createRegistry(6789);
