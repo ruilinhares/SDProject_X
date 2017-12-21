@@ -96,8 +96,8 @@
     <img src="../assets/image.png" alt="Avatar" class="avatar">
 </div>
 <div class="container">
-    <form action="registar">
-        <label><b>Registar Utilizador</b></label>
+    <form action="registar.action">
+        <h2>Registar Utilizador</h2>
         <br/>
         <label><b><br/>Numero da UC:</b></label>
         <s:textfield name="uc" />
@@ -118,16 +118,9 @@
         <label><b>Tipo (Estudante,Docente ou Funcionario):</b></label>
         <s:textfield name="tipo" />
         <button type="submit">Registar</button>
-        <script type="text/javascript">
-            function showResult() {
-                alert("Here it comes ");
-                var result = "<s:property value='key1'/>";
-                alert("Before Display");
-            }
-        </script>
-        <form action="cancelar">
-            <button>Cancelar</button>
-        </form>
+    </form>
+    <form action="menu.action">
+        <button>Voltar ao menu</button>
     </form>
 </div>
 </body>

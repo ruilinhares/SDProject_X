@@ -167,14 +167,17 @@ public class Nucleo extends Eleicao implements Serializable {
      * @param uc numero da uc do eleitor em questão.
      */
     @Override
-    public void localVoto(String uc) {
+    public StringBuilder localVoto(String uc) {
         System.out.println(this.getTitulo());
+        StringBuilder res = new StringBuilder();
         for (Voto aux : listaVotos)
             if (uc.equals(aux.getEleitor().getNumeroUC())) {
-                System.out.println("Nome: "+aux.getEleitor().getNome());
-                System.out.println("Local: "+aux.getLocal().getNome());
-                System.out.println("Hora: "+aux.getHoraDeVoto());
+                res.append("Nome: ").append(aux.getEleitor().getNome()).append("\n");
+                res.append("Local: ").append(aux.getLocal().getNome()).append("\n");
+                res.append("Hora: ").append(aux.getHoraDeVoto()).append("\n");
+                res.append("\n--------------------\n");
             }
+        return res;
     }
 
     /**
@@ -193,5 +196,9 @@ public class Nucleo extends Eleicao implements Serializable {
                 ", inicio=" + inicio +
                 ", fim=" + fim +
                 '}';
+    }
+
+    public void addListaCandidata(ListaCandidata lista){
+        listaCandidatos.add(lista);
     }
 }

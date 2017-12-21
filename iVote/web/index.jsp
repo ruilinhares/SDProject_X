@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="CSS/style.css" />
 </head>
 <body>
-    <form action="login" method="post">
+    <form action="login.action" method="post">
         <div class="imgcontainer">
             <img src="assets/image.png" >
         </div>

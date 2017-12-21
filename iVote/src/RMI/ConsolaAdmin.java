@@ -724,7 +724,6 @@ public class ConsolaAdmin implements Serializable{
         }
     }
 
-
     private void EscolheEleicaoPassada(){
         try{
            	ArrayList<Eleicao> listaEle;

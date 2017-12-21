@@ -160,7 +160,7 @@ public abstract class Eleicao implements Serializable {
      * Método que permite saber o local de voto de um eleitor;
      * @param uc Número do cartão da UC desse eleitor;
      */
-    public abstract void localVoto(String uc);
+    public abstract StringBuilder localVoto(String uc);
 
     /**
      * Método que retorna a string com dados da eleição
@@ -178,4 +178,6 @@ public abstract class Eleicao implements Serializable {
     public Boolean eleicaoEquals(Eleicao ele){
         return ele.getTitulo().equals(this.Titulo) && ele.getDescricao().equals(this.Descricao) && ele.getInicio().equals(this.inicio) && ele.getFim().equals(this.fim);
     }
+
+    public abstract void addListaCandidata(ListaCandidata lista);
 }

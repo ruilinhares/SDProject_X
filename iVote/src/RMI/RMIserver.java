@@ -68,6 +68,15 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         return new ArrayList<String>(users.keySet());
     }
 
+    public boolean addListaCandidata(String titulo, String lista) throws  RemoteException{
+        for (Eleicao aux : listaEleicoes){
+            if (aux.getTitulo().toUpperCase().equals(lista.toUpperCase())) {
+                aux.addListaCandidata(new ListaCandidata(lista));
+                return true;
+            }
+        }
+        return false;
+    }
 //#############################################################################
     synchronized public ArrayList<Eleicao> getListaEleicoes()  {
         return listaEleicoes;

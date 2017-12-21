@@ -371,33 +371,44 @@ public class DirecaoGeral extends Eleicao implements Serializable{
     }
 
     @Override
-    public void localVoto(String uc) {
+    public StringBuilder localVoto(String uc) {
         System.out.println(this.getTitulo());
         int v = 0;
+        StringBuilder res = new StringBuilder();
         for (Voto aux : listaVotosEstudantes)
             if (uc.equals(aux.getEleitor().getNumeroUC())) {
-                System.out.print("(Estudantes)");
-                System.out.println("Nome: "+aux.getEleitor().getNome());
-                System.out.println("Local: "+aux.getLocal().getNome());
-                System.out.println("Hora: "+aux.getHoraDeVoto());
+                res.append("(Estudantes)\n");
+                res.append("Nome: ").append(aux.getEleitor().getNome()).append("\n");
+                res.append("Local: ").append(aux.getLocal().getNome()).append("\n");
+                res.append("Hora: ").append(aux.getHoraDeVoto()).append("\n");
+                res.append("\n--------------------\n");
                 v=1;
             }
         if (v == 0)
             for (Voto aux : listaVotosDocentes)
                 if (uc.equals(aux.getEleitor().getNumeroUC())) {
-                    System.out.print("(Docentes)");
-                    System.out.println("Nome: "+aux.getEleitor().getNome());
-                    System.out.println("Local: "+aux.getLocal().getNome());
-                    System.out.println("Hora: "+aux.getHoraDeVoto());
+                    res.append("(Docentes)\n");
+                    res.append("Nome: ").append(aux.getEleitor().getNome()).append("\n");
+                    res.append("Local: ").append(aux.getLocal().getNome()).append("\n");
+                    res.append("Hora: ").append(aux.getHoraDeVoto()).append("\n");
+                    res.append("\n--------------------\n");
                     v=1;
                 }
         if (v==0)
             for (Voto aux : listaVotosFuncionarios)
                 if (uc.equals(aux.getEleitor().getNumeroUC())) {
-                    System.out.print("(Funcionarios)");
-                    System.out.println("Nome: "+aux.getEleitor().getNome());
-                    System.out.println("Local: "+aux.getLocal().getNome());
-                    System.out.println("Hora: "+aux.getHoraDeVoto());
+                    res.append("(Funcionarios)\n");
+                    res.append("Nome: ").append(aux.getEleitor().getNome()).append("\n");
+                    res.append("Local: ").append(aux.getLocal().getNome()).append("\n");
+                    res.append("Hora: ").append(aux.getHoraDeVoto()).append("\n");
+                    res.append("\n--------------------\n");
                 }
+        return res;
+    }
+
+    public void addListaCandidata(ListaCandidata lista){
+        listaCandidatosEstudantes.add(lista);
+        listaCandidatosDocentes.add(lista);
+        listaCandidatosFuncionarios.add(lista);
     }
 }

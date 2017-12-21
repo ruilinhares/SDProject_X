@@ -58,8 +58,7 @@
     }
 
     img.avatar {
-        width: 10%;
-        border-radius: 50%;
+        width: 20%;
     }
 
     .title{
@@ -97,7 +96,8 @@
 </div>
 <div class="container">
     <form action="departamento.action" method="post">
-        <label><b>Gerir Departamentos</b></label>
+        <h2>Gerir Departamentos</h2>
+        <h5>(preencha apenas o campo que desejar)</h5>
         <br/>
         <label><b><br/>1.Criar Departamento <br/><br/> Nome:</b></label>
         <s:textfield name="depnomeC" />
@@ -106,8 +106,8 @@
         <s:textfield name="depnomeA" />
         <button type="submit">Confirma</button>
     </form>
-    <form action="cancelar.action">
-        <button>Cancelar</button>
+    <form action="menu.action">
+        <button>Voltar ao menu</button>
     </form>
 </div>
 </body>

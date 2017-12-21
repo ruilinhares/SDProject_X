@@ -61,8 +61,7 @@
     }
 
     img.avatar {
-        width: 10%;
-        border-radius: 50%;
+        width: 20%;
     }
 
 
@@ -112,19 +111,19 @@
         <form action="b1">
             <button>4.Consultar Eleicao</button>
         </form>
-        <form action="b1">
+        <form action="button5.action">
             <button>5.Gerir Candidatos</button>
         </form>
-        <form action="b1">
+        <form action="button6.action">
             <button>6.Gerir Mesas de Voto</button>
         </form>
         <form action="b1">
             <button>7.Alterar Eleicao</button>
         </form>
-        <form action="b1">
+        <form action="button8.action">
             <button>8.Local de voto</button>
         </form>
-        <form action="b1">
+        <form action="button9.action">
             <button>9.Estado das mesas de voto</button>
         </form>
         <form action="b1">

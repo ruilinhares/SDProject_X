@@ -2,7 +2,10 @@ package iVotas.Model;
 
 import RMI.RMIinterface;
 import RMI.src.Classes.Departamento;
+import RMI.src.Classes.Eleicao;
+import RMI.src.Classes.ListaCandidata;
 import RMI.src.Classes.Pessoa;
+import RMI.src.TCP.TCPServer;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -114,6 +117,69 @@ public class iVotasBean extends UnicastRemoteObject {
             for (Departamento auxDep : departamentos) {
                 if ((nomeDep.toUpperCase()).equals(auxDep.getNome().toUpperCase())) {
                     this.serverRMI.RemoveDepartamento(i);
+                    return true;
+                }
+                i++;
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean addLista(String titulo, String lista){
+        try {
+            return serverRMI.addListaCandidata(titulo,lista);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public StringBuilder listaLocaisVoto(String uc){
+        StringBuilder res = new StringBuilder();
+        try {
+            ArrayList<Eleicao> eleicoes = this.serverRMI.getListaEleicoes();
+
+            for (Eleicao aux : eleicoes){
+                res.append(aux.localVoto(uc));
+            }
+
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public boolean criaMesa(String dep){
+        try {
+            ArrayList<TCPServer> mesas = this.serverRMI.getMesasVotos();
+
+            for (TCPServer mesa : mesas){
+                if((mesa.getDepartamento().getNome().toUpperCase()).equals(dep.toUpperCase())){
+                    System.out.println("Este departamento já tem uma mesa");
+                    return false;
+                }
+            }
+            Departamento depAux = serverRMI.getDepartamento(dep);
+            if (depAux!=null) {
+                TCPServer novamesa=new TCPServer(depAux);
+                serverRMI.AddMesa(novamesa);
+                return true;
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean apagaMesa(String dep){
+        try {
+            ArrayList<TCPServer> mesas = this.serverRMI.getMesasVotos();
+            int i = 0;
+            for (TCPServer mesa : mesas){
+                if((mesa.getDepartamento().getNome().toUpperCase()).equals(dep.toUpperCase())){
+                    serverRMI.RemoveMesa(i);
                     return true;
                 }
                 i++;
