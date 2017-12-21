@@ -85,7 +85,7 @@
         </action>
 
         <!-- 'registar' action calls 'execute' in 'RegistarAction' -->
-        <action name="gerirmesas" class="iVotas.Action.ListaCandidataAction" method="execute">
+        <action name="gerirmesas" class="iVotas.Action.GerirMesasAction" method="execute">
             <result name="success">/hey.jsp</result>
             <result name="login">/pages/gerirMesas.jsp</result>
         </action>
