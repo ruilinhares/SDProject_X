@@ -29,9 +29,26 @@
 
         <!-- 'login' action calls 'execute' in 'LoginAction' -->
         <action name="login" class="iVotas.Action.LoginAction" method="execute">
-            <result name="success">/hey.jsp</result>
+            <result name="success">/pages/error.jsp</result>
             <result name="login">/index.jsp</result>
             <result name="administrador" type="redirect">/pages/menu.jsp</result>
+        </action>
+
+        <action name="listareleicoes" class="iVotas.Action.VotarAction">
+            <result>/pages/votar.jsp</result>
+        </action>
+
+        <action name="listarcandidatos" class="iVotas.Action.VotarAction" method="comboCandidatos">
+            <result name="none">/pages/votar.jsp</result>
+        </action>s
+
+        <action name="votar" class="iVotas.Action.VotarAction" method="execute">
+            <result name="success">/hey.jsp</result>
+            <result name="error">/pages/error.jsp</result>
+        </action>
+
+        <action name="logout" class="iVotas.Action.LogoutAction" method="execute">
+            <result name="success">/index.jsp</result>
         </action>
 
         <action name="b1">
@@ -86,7 +103,7 @@
         </action>
 
         <!-- 'registar' action calls 'execute' in 'RegistarAction' -->
-        <action name="gerirmesas" class="iVotas.Action.ListaCandidataAction" method="execute">
+        <action name="gerirmesas" class="iVotas.Action.GerirMesasAction" method="execute">
             <result name="success">/hey.jsp</result>
             <result name="login">/pages/gerirMesas.jsp</result>
         </action>

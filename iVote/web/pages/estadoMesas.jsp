@@ -95,11 +95,9 @@
     <img src="../assets/image.png" alt="Avatar" class="avatar">
 </div>
 <div class="container">
-    <form>
     <h2>Estado das Mesas de Voto</h2>
     <br/>
-    <s:textarea value="%{local}" />
-    </form>
+    <s:textarea />
     <form action="menu.action">
         <button>Voltar ao menu</button>
     </form>

@@ -1,6 +1,6 @@
 package iVotas.Action;
 
-import RMI.src.Classes.*;
+import RMI.Classes.*;
 
 import java.rmi.RemoteException;
 

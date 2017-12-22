@@ -1,7 +1,7 @@
 package RMI;
 
-import RMI.src.Classes.*;
-import RMI.src.TCP.TCPServer;
+import RMI.Classes.*;
+import RMI.TCP.TCPServer;
 
 import java.io.*;
 import java.net.*;

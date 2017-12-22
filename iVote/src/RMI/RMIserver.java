@@ -1,7 +1,7 @@
 package RMI;
 import java.io.*;
-import RMI.src.Classes.*;
-import RMI.src.TCP.*;
+import RMI.Classes.*;
+import RMI.TCP.*;
 
 import java.net.*;
 import java.rmi.*;
@@ -68,7 +68,6 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
     }
 
     public ArrayList<String> getAllUsers() throws RemoteException {
-        System.out.println("Looking up all users...");
         return new ArrayList<String>(users.keySet());
     }
 
@@ -81,6 +80,41 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         }
         return false;
     }
+
+    public ArrayList<String> getEleicoesDisponiveis(String user){
+        ArrayList<String> lista = new ArrayList<>();
+        for (Eleicao ele : listaEleicoes)
+            if (ele.verificaVotacao())
+                for (Pessoa pessoa : ele.getListaEleitores())
+                    if (user.equals(pessoa.getNumeroUC()))
+                        lista.add(ele.getTitulo());
+        return lista;
+    }
+
+    public ArrayList<String> getListaCandidatos(String eleicao){
+        for (Eleicao ele : listaEleicoes)
+            if (eleicao.equals(ele.getTitulo()))
+                return ele.getCandidatos();
+
+        return null;
+    }
+
+    public boolean votar(String eleicao, String lista, String user){
+        for (Eleicao ele : listaEleicoes)
+            if (eleicao.equals(ele.getTitulo())){
+                for (Pessoa p : ele.getListaEleitores()){
+                    if (user.equals(p.getNumeroUC())){
+                        Voto voto = new Voto(p, new ListaCandidata(lista),null);
+                        ele.removeEleitor(voto);
+                        ele.addVoto(voto);
+                        return true;
+                    }
+                }
+            }
+        return false;
+    }
+
+
 //#############################################################################
     synchronized public ArrayList<Eleicao> getListaEleicoes()  {
         return listaEleicoes;

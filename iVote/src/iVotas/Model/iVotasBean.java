@@ -1,10 +1,10 @@
 package iVotas.Model;
 
 import RMI.RMIinterface;
-import RMI.src.Classes.Departamento;
-import RMI.src.Classes.Eleicao;
-import RMI.src.Classes.Pessoa;
-import RMI.src.TCP.TCPServer;
+import RMI.Classes.Departamento;
+import RMI.Classes.Eleicao;
+import RMI.Classes.Pessoa;
+import RMI.TCP.TCPServer;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -198,5 +198,17 @@ public class iVotasBean extends UnicastRemoteObject {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<String> getEleicoes() throws RemoteException{
+        return this.serverRMI.getEleicoesDisponiveis(this.username);
+    }
+
+    public ArrayList<String> getCandidatos(String ele) throws RemoteException{
+        return this.serverRMI.getListaCandidatos(ele);
+    }
+
+    public boolean votar(String ele, String lista) throws RemoteException{
+        return serverRMI.votar(ele,lista,this.username);
     }
 }

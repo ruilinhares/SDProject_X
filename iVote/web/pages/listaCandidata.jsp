@@ -95,11 +95,11 @@
     <img src="../assets/image.png" alt="Avatar" class="avatar">
 </div>
 <div class="container">
-    <form action="departamento.action" method="post">
+    <form action="lista.action" method="post">
         <h2>Lista Candidata</h2>
         <br/>
         <label><b><br/>Nome da Lista <br/></b></label>
-        <s:textfield name="nome" />
+        <s:textfield name="lista" />
         <label><b>Titulo da eleição</b></label>
         <s:textfield name="eleicao" />
         <br/>

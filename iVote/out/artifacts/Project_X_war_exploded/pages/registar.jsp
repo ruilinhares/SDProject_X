@@ -45,11 +45,6 @@
     label{
         font-family:helvetica;
     }
-    .cancelbtn {
-        width: auto;
-        padding: 10px 18px;
-        background-color: #f44336;
-    }
 
     .imgcontainer {
         text-align: center;
@@ -61,34 +56,10 @@
         border-radius: 50%;
     }
 
-    .title{
-        font-family:"Arial";
-    }
-
     .container {
         padding: 16px;
     }
 
-    #face{
-        background-color:#3b5998;
-
-    }
-
-    span.psw {
-        float: right;
-        padding-top: 16px;
-    }
-
-    /* Change styles for span and cancel button on extra small screens */
-    @media screen and (max-width: 300px) {
-        span.psw {
-            display: block;
-            float: none;
-        }
-        .cancelbtn {
-            width: 100%;
-        }
-    }
 </style>
 <body>
 
