@@ -10,7 +10,7 @@ public class GerirMesasAction extends Action {
             if (this.getiVotasBean().criaMesa(mesaCria))
                 return SUCCESS;
         }
-        else if (mesaApaga!=null && !mesaApaga.equals("")){
+        else if (mesaCria!=null && !mesaCria.equals("")){
             if (this.getiVotasBean().apagaMesa(mesaApaga))
                 return SUCCESS;
         }

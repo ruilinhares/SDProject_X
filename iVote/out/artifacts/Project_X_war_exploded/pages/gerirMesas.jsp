@@ -101,6 +101,7 @@
         <br/>
         <label><b><br/>1.Criar Mesa</b></label>
         <s:textfield name="mesaCria" />
+
         <label><b>2.Apagar Mesa</b></label>
         <s:textfield name="mesaApaga" />
         <button type="submit">Confirma</button>

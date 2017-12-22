@@ -9,10 +9,21 @@ public class DepartamentoAction extends Action {
 
     public String execute() throws RemoteException{
         if(depnomeC!=null && !depnomeC.equals("")){
+            System.out.println(depnomeC);
             if (this.getiVotasBean().criaDep(depnomeC))
                 return SUCCESS;
         }
-        else if(depnomeA!=null && !depnomeA.equals("")){
+        if(depnomeA!=null && !depnomeA.equals("")){
+            System.out.println(depnomeA);
+            if (this.getiVotasBean().apagaDep(depnomeA))
+                return SUCCESS;
+        }
+        return LOGIN;
+    }
+
+    public String executeApaga() throws RemoteException{
+        if(depnomeA!=null && !depnomeA.equals("")){
+            System.out.println(depnomeA);
             if (this.getiVotasBean().apagaDep(depnomeA))
                 return SUCCESS;
         }
