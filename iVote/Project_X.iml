@@ -16,9 +16,6 @@
           <propertiesKeys disabled="false" />
         </configuration>
       </facet>
-      <facet type="webservices" name="WebServices">
-        <configuration ws.engine="Glassfish / JAX-WS 2.2 RI / Metro 1.X / JWSDP 2.2" />
-      </facet>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
