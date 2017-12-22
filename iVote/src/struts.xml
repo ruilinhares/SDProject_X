@@ -68,8 +68,9 @@
 
         <!-- 'registar' action calls 'execute' in 'RegistarAction' -->
         <action name="registar" class="iVotas.Action.RegistarAction" method="execute">
-            <result name="success">/hey.jsp</result>
-            <result name="login">/pages/error.jsp</result>
+            <result name="success">pages/menu.jsp</result>
+            <result name="error">/pages/registar.jsp</result>
+            <result name="login">/index.jsp</result>
         </action>
 
         <!-- 'gerirDep' action calls 'execute' in 'DepartamentoAction' -->

@@ -19,6 +19,7 @@ public class RegistarAction extends Action{
 
     @Override
     public String execute() throws RemoteException {
+
         if (uc!=null && cc!=null && validade!=null && pass!=null && telemovel!=null && morada!=null && dep!=null && tipo!=null) {
             Departamento departamento = this.getiVotasBean().getDepartamento(dep);
             if (departamento != null) {
@@ -35,12 +36,12 @@ public class RegistarAction extends Action{
                         novapessoa = new Funcionario(nome, uc, telemovel, morada, pass, departamento, cc, validade);
                         break;
                     default:
-                        return LOGIN;
+                        return ERROR;
                 }
                 if (this.getiVotasBean().registarPessoa(novapessoa))
                     return SUCCESS;
             } else
-                return LOGIN;
+                return ERROR;
         }
         return LOGIN;
     }

@@ -59,6 +59,10 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         return !onlineUsers.contains(user);
     }
 
+    public void logout(String user) throws RemoteException {
+        this.onlineUsers.remove(user);
+    }
+
     public void addUser(String user, String pass) throws RemoteException {
         this.users.put(user, pass);
     }

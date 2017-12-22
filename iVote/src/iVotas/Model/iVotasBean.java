@@ -3,7 +3,6 @@ package iVotas.Model;
 import RMI.RMIinterface;
 import RMI.src.Classes.Departamento;
 import RMI.src.Classes.Eleicao;
-import RMI.src.Classes.ListaCandidata;
 import RMI.src.Classes.Pessoa;
 import RMI.src.TCP.TCPServer;
 
@@ -38,17 +37,6 @@ public class iVotasBean extends UnicastRemoteObject {
         }
     }
 
-    public boolean userLogin() throws RemoteException {
-        return serverRMI.userLogin(this.username,this.password);
-    }
-
-    public boolean logged(String user) throws RemoteException {
-        return serverRMI.logged(user);
-    }
-
-    public ArrayList<String> getAllUsers() throws RemoteException {
-        return serverRMI.getAllUsers(); // are you going to throw all exceptions?
-    }
 
     public Departamento getDepartamento(String dep) throws RemoteException {
         return serverRMI.getDepartamento(dep);
@@ -188,5 +176,27 @@ public class iVotasBean extends UnicastRemoteObject {
             e.printStackTrace();
         }
         return false;
+    }
+
+    //---Votar------------------------------
+
+    public boolean userLogin(String user, String pass) throws RemoteException {
+        return serverRMI.userLogin(user,pass);
+    }
+
+    public boolean logged(String user) throws RemoteException {
+        return serverRMI.logged(user);
+    }
+
+    public ArrayList<String> getAllUsers() throws RemoteException {
+        return serverRMI.getAllUsers(); // are you going to throw all exceptions?
+    }
+
+    public void logout(String user){
+        try {
+            this.serverRMI.logout(user);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }

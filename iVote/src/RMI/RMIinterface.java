@@ -11,6 +11,7 @@ public interface RMIinterface extends Remote {
 
     boolean logged(String user) throws RemoteException;
     boolean userLogin(String name, String password) throws RemoteException;
+    void logout(String user) throws RemoteException;
     void addUser(String user, String pass) throws RemoteException;
     ArrayList<Departamento> getListaDepartamentos() throws RemoteException;
     void addDepartamento(Departamento dep) throws RemoteException;

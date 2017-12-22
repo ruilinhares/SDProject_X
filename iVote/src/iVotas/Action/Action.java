@@ -10,15 +10,15 @@ import java.util.Map;
 public class Action extends ActionSupport implements SessionAware {
 
     private static final long serialVersionUID = 4L;
-    private Map<String, Object> session;
+    Map<String, Object> session = null;
 
-    public iVotasBean getiVotasBean() throws RemoteException {
+    iVotasBean getiVotasBean() throws RemoteException {
         if(!session.containsKey("iVotasBean"))
             this.setiVotasBean(new iVotasBean());
         return (iVotasBean) session.get("iVotasBean");
     }
 
-    public void setiVotasBean(iVotasBean bean) {
+    void setiVotasBean(iVotasBean bean) {
         this.session.put("iVotasBean", bean);
     }
 
