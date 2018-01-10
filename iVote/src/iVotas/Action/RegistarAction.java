@@ -1,6 +1,6 @@
 package iVotas.Action;
 
-import RMI.Classes.*;
+import RMI.source.Classes.*;
 
 import java.rmi.RemoteException;
 
@@ -43,7 +43,7 @@ public class RegistarAction extends Action{
             } else
                 return ERROR;
         }
-        return LOGIN;
+        return ERROR;
     }
 
     public void setUc(String uc) {
@@ -82,3 +82,4 @@ public class RegistarAction extends Action{
         this.tipo = tipo;
     }
 }
+

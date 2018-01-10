@@ -1,7 +1,7 @@
 package RMI;
 
-import RMI.Classes.*;
-import RMI.TCP.TCPServer;
+import RMI.source.Classes.*;
+import RMI.source.TCP.TCPServer;
 
 import java.io.*;
 import java.net.*;
@@ -180,6 +180,22 @@ public class ConsolaAdmin implements Serializable{
         }
     }
 
+    public Departamento getDepartamento(String nome){
+        ArrayList<Departamento> listaDep;
+        while (true) {
+            try {
+                listaDep = rmi.getListaDepartamentos();
+                break;
+            } catch (RemoteException ignored) {
+                reconectarRMI();
+            }
+        }
+        for (Departamento dep:listaDep) {
+            if (dep.getNome().toLowerCase().equals(nome.toLowerCase()))
+                return dep;
+        }
+        return null;
+    }
     //Função que permite escolher um departamento
     private Departamento EscolheDepartamento(){
         try {
@@ -723,6 +739,7 @@ public class ConsolaAdmin implements Serializable{
             System.out.println(e.getMessage());
         }
     }
+
 
     private void EscolheEleicaoPassada(){
         try{

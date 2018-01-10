@@ -58,7 +58,8 @@
     }
 
     img.avatar {
-        width: 20%;
+        width: 10%;
+        border-radius: 50%;
     }
 
     .title{
@@ -101,13 +102,12 @@
         <br/>
         <label><b><br/>1.Criar Departamento <br/><br/> Nome:</b></label>
         <s:textfield name="depnomeC" />
-
         <label><b>2.Apagar Departamento:<br/><br/> Nome:</b></label>
         <s:textfield name="depnomeA" />
         <button type="submit">Confirma</button>
     </form>
-    <form action="menu.action">
-        <button>Voltar ao menu</button>
+    <form action="cancelar">
+        <button type="submit">Cancelar</button>
     </form>
 </div>
 </body>

@@ -103,10 +103,11 @@
         <button type="submit">Confirma</button>
         <s:textarea value="%{local}" />
     </form>
-    <form action="menu.action">
+    <form action="cancelar">
         <button>Voltar ao menu</button>
     </form>
 </div>
 </body>
 </html>
+
 

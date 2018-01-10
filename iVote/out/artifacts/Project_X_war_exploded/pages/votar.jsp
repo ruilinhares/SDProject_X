@@ -46,6 +46,12 @@
         font-family:helvetica;
     }
 
+	.cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+    }
+    
     .imgcontainer {
         text-align: center;
         margin: 24px 0 12px 0;
@@ -76,11 +82,14 @@
         <br>
         <label><b>Lista de Candidatos</b></label>
         <s:textarea value="%{listacandidatos}" cols="50" rows="30" disabled="true"/>
+        <button type="submit">Ver Listas Candidatas</button>
 
     </form>
     <form action="votar.action">
-        <s:textfield name="lista" headerValue="Opção de voto"/>
-        <button type="submit">Confirma</button>
+        <label><b><br/>Lista de Eleicões disponiveis: </b></label>
+        <s:textfield name="eleicao" label="Eleição para para votar: "/>
+        <s:textfield name="lista" label="Lista a votar: "/>
+        <button type="submit">Vota</button>
     </form>
     <form action="logout.action">
         <button>Logout</button>
@@ -88,4 +97,5 @@
 </div>
 </body>
 </html>
+
 

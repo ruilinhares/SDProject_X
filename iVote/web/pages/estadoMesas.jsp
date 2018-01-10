@@ -98,10 +98,11 @@
     <h2>Estado das Mesas de Voto</h2>
     <br/>
     <s:textarea />
-    <form action="menu.action">
+    <form action="cancelar">
         <button>Voltar ao menu</button>
     </form>
 </div>
 </body>
 </html>
+
 

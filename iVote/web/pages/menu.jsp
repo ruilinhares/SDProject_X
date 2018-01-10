@@ -105,10 +105,10 @@
         <form action="button2.action">
             <button>2.Gerir Departamentos</button>
         </form>
-        <form action="b1.action">
+        <form action="button3.action">
             <button>3.Criar Eleicao</button>
         </form>
-        <form action="b1.action">
+        <form action="button4.action">
             <button>4.Consultar Eleicao</button>
         </form>
         <form action="button5.action">
@@ -117,7 +117,7 @@
         <form action="button6.action">
             <button>6.Gerir Mesas de Voto</button>
         </form>
-        <form action="b1.action">
+        <form action="button7.action">
             <button>7.Alterar Eleicao</button>
         </form>
         <form action="button8.action">
@@ -126,14 +126,18 @@
         <form action="button9.action">
             <button>9.Estado das mesas de voto</button>
         </form>
-        <form action="b1.action">
-        <button>10.Consultar Eleicao Passada</button>
+        <form action="button10.action">
+            <button>10.Consultar Eleicao Passada</button>
         </form>
-
+        <form action="button11.action">
+            <button>11.Associar Mesa</button>
+        </form>
+        
         <br><br>
         <form action="logout.action">
             <button>Logout</button>
         </form>
+
     </div>
 </form>
 </body>

@@ -45,6 +45,11 @@
     label{
         font-family:helvetica;
     }
+    .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+    }
 
     .imgcontainer {
         text-align: center;
@@ -56,10 +61,34 @@
         border-radius: 50%;
     }
 
+    .title{
+        font-family:"Arial";
+    }
+
     .container {
         padding: 16px;
     }
 
+    #face{
+        background-color:#3b5998;
+
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+        .cancelbtn {
+            width: 100%;
+        }
+    }
 </style>
 <body>
 
@@ -67,8 +96,8 @@
     <img src="../assets/image.png" alt="Avatar" class="avatar">
 </div>
 <div class="container">
-    <form action="registar.action">
-        <h2>Registar Utilizador</h2>
+    <form action="registar">
+        <label><b>Registar Utilizador</b></label>
         <br/>
         <label><b><br/>Numero da UC:</b></label>
         <s:textfield name="uc" />
@@ -90,8 +119,8 @@
         <s:textfield name="tipo" />
         <button type="submit">Registar</button>
     </form>
-    <form action="menu.action">
-        <button>Voltar ao menu</button>
+    <form action="cancelar">
+        <button>Cancelar</button>
     </form>
 </div>
 </body>

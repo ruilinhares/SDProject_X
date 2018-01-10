@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="CSS/style.css" />
 </head>
 <body>
-    <form action="login.action" method="post">
+    <form action="login" method="post">
         <div class="imgcontainer">
             <img src="assets/image.png" >
         </div>
@@ -25,7 +25,7 @@
             <s:textfield name="username" />
 
             <label><b>Password</b></label>
-            <s:textfield name="password" />
+            <s:textfield type="password" name="password" />
 
             <button type="submit" value="login">Login</button>
             <label><b>Ou</b></label>

@@ -7,9 +7,6 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Project_X" />
         </element>
-        <element id="directory" name="lib">
-          <element id="artifact" artifact-name="Struts_2-2_5_14_1" />
-        </element>
       </element>
     </root>
   </artifact>

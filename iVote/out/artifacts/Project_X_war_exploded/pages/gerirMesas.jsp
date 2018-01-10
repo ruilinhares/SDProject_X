@@ -106,10 +106,11 @@
         <s:textfield name="mesaApaga" />
         <button type="submit">Confirma</button>
     </form>
-    <form action="menu.action">
+    <form action="cancelar.action">
         <button>Voltar ao menu</button>
     </form>
 </div>
 </body>
 </html>
+
 

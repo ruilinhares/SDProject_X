@@ -14,9 +14,7 @@ public class VotarAction extends Action {
 
     public VotarAction() throws Exception {
         ArrayList<String> auxeleicoes = new ArrayList<>();
-
         auxeleicoes = this.getiVotasBean().getEleicoes();
-
         if (!auxeleicoes.isEmpty()){
             for (String ele : auxeleicoes)
                 listaeleicoes += ele +"\n";
@@ -27,7 +25,6 @@ public class VotarAction extends Action {
 
     public String comboCandidatos() throws Exception {
         ArrayList<String> auxlistas = new ArrayList<>();
-
         if (eleicao!=null){
             System.out.println(eleicao);
             auxlistas = this.getiVotasBean().getCandidatos(eleicao);
@@ -39,7 +36,6 @@ public class VotarAction extends Action {
 
     @Override
     public String execute() throws Exception {
-
         if (eleicao!=null && lista!=null){
             System.out.println(eleicao);
             System.out.println(lista);

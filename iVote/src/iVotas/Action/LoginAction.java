@@ -1,6 +1,11 @@
 package iVotas.Action;
 
+import com.opensymphony.xwork2.ActionSupport;
+import iVotas.Model.iVotasBean;
+import org.apache.struts2.interceptor.SessionAware;
+
 import java.rmi.RemoteException;
+import java.util.Map;
 
 public class LoginAction extends Action {
 
@@ -11,10 +16,9 @@ public class LoginAction extends Action {
     @Override
     public String execute() throws RemoteException {
         if (this.username != null && this.password != null && !this.username.equals("") && !this.password.equals("")) {
-            if (this.getiVotasBean().userLogin(this.username,this.password)) {
-                this.getiVotasBean().setUsername(this.username);
-                this.getiVotasBean().setPassword(this.password);
-                this.setiVotasBean(getiVotasBean());
+            this.getiVotasBean().setUsername(this.username);
+            this.getiVotasBean().setPassword(this.password);
+            if (this.getiVotasBean().userLogin()) {
                 this.session.put("username", this.username);
                 this.session.put("loggedin", true);
                 return SUCCESS;
@@ -39,5 +43,11 @@ public class LoginAction extends Action {
 
     public String getPassword() {
         return password;
+    }
+
+    public String logout() throws Exception{
+        this.getiVotasBean().logout((String)this.session.get("username"));
+        this.session.clear();
+        return SUCCESS;
     }
 }

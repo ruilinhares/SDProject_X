@@ -1,16 +1,16 @@
 package iVotas.Model;
 
 import RMI.RMIinterface;
-import RMI.Classes.Departamento;
-import RMI.Classes.Eleicao;
-import RMI.Classes.Pessoa;
-import RMI.TCP.TCPServer;
+import RMI.source.Classes.*;
+import RMI.source.TCP.TCPServer;
+
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class iVotasBean extends UnicastRemoteObject {
 
@@ -35,6 +35,10 @@ public class iVotasBean extends UnicastRemoteObject {
                 System.out.println("Primary is now down.");
             }
         }
+    }
+
+    public boolean userLogin() throws RemoteException {
+        return serverRMI.userLogin(this.username,this.password);
     }
 
 
@@ -115,7 +119,20 @@ public class iVotasBean extends UnicastRemoteObject {
         return false;
     }
 
-    public boolean addLista(String titulo, String lista){
+    public ArrayList<Eleicao> lista() {
+        ArrayList<Eleicao> lista;
+        while (true) {
+            try {
+                lista = this.serverRMI.getListaEleicoes();
+                break;
+            } catch (RemoteException ignored) {
+                this.ligarRMI();
+            }
+        }
+        return lista;
+    }
+
+public boolean addLista(String titulo, String lista){
         try {
             return serverRMI.addListaCandidata(titulo,lista);
         } catch (RemoteException e) {
@@ -211,4 +228,109 @@ public class iVotasBean extends UnicastRemoteObject {
     public boolean votar(String ele, String lista) throws RemoteException{
         return serverRMI.votar(ele,lista,this.username);
     }
+
+
+
+    public Departamento encontraDepartamento(String nome){
+        ArrayList<Departamento> listaDep;
+        while (true) {
+            try {
+                listaDep = this.serverRMI.getListaDepartamentos();
+                break;
+            } catch (RemoteException ignored) {
+                this.ligarRMI();
+            }
+        }
+        for (Departamento dep:listaDep) {
+            if (dep.getNome().toLowerCase().equals(nome.toLowerCase()))
+                return dep;
+        }
+        return null;
+    }
+
+    public boolean CriaNucleo(String titulo,String descricao,Calendar ini,Calendar fim,Departamento dep) throws RemoteException {
+        Nucleo election = new Nucleo(titulo,descricao,ini,fim,dep);
+        this.serverRMI.AddEleicao(election);
+        return true;
+    }
+
+    public boolean CriaDG(String titulo,String descricao,Calendar ini,Calendar fim,ArrayList<ListaCandidata> EstudantesCandidatos,ArrayList<ListaCandidata> DocentesCandidatos, ArrayList<ListaCandidata>FuncionariosCandidatos) throws RemoteException {
+        ArrayList<Pessoa> listaP;
+        while (true) {
+            try {
+                listaP = this.serverRMI.getListaPessoas();
+                break;
+            } catch (RemoteException ignored) {
+                this.ligarRMI();
+            }
+        }
+        DirecaoGeral election = new DirecaoGeral(titulo,descricao,ini,fim,EstudantesCandidatos,DocentesCandidatos,FuncionariosCandidatos,listaP);
+        this.serverRMI.AddEleicao(election);
+        return true;
+    }
+
+    public ArrayList<Eleicao> getListaEle() throws RemoteException{
+        return this.serverRMI.getListaEleicoes();
+    }
+
+    public Eleicao RemoveEle(String nome) throws RemoteException{
+        Eleicao ele;
+        ArrayList<Eleicao> lista;
+        int index;
+        while (true) {
+            try {
+                lista = this.serverRMI.getListaEleicoes();
+                break;
+            } catch (RemoteException ignored) {
+                this.ligarRMI();
+            }
+        }
+        for (int i=0;i<lista.size();i++){
+            if (nome.toLowerCase().equals(lista.get(i).getTitulo())){
+                index=i;
+                ele=lista.get(i);
+                this.serverRMI.RemoveEleicao(index);
+                return ele;
+            }
+
+        }
+        return null;
+    }
+
+    public boolean addEleicao(Eleicao ele){
+        while (true) {
+            try {
+                this.serverRMI.AddEleicao(ele);
+                return true;
+            } catch (RemoteException ignored) {
+                this.ligarRMI();
+            }
+        }
+
+    }
+
+
+    public ArrayList<Eleicao> escolheEle(String eleitor) throws RemoteException {
+        Pessoa p = this.serverRMI.identificarEleitor(eleitor);
+        ArrayList<Eleicao> eleicoes;
+        try {
+            eleicoes = this.serverRMI.identificarEleicoes(p, p.getDepartamento()); // eleicoes disponiveis para o leitor votar
+            return eleicoes;
+        } catch (RemoteException e) { // fail over
+            this.ligarRMI();
+        }
+        return null;
+
+    }
+
+    public Pessoa eleitor(String n) throws RemoteException{
+        return this.serverRMI.identificarEleitor(n);
+    }
+
+    public ArrayList<TCPServer> getMesas() throws RemoteException{
+        return this.serverRMI.getMesasVotos();
+    }
+
 }
+
+

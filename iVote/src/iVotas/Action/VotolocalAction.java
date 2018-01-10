@@ -38,3 +38,4 @@ public class VotolocalAction extends Action {
         this.local = local;
     }
 }
+

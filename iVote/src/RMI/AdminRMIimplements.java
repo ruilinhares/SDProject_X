@@ -1,6 +1,6 @@
 package RMI;
-import RMI.Classes.*;
-import RMI.TCP.TCPServer;
+import RMI.source.Classes.*;
+import RMI.source.TCP.TCPServer;
 
 import java.rmi.*;
 import java.util.ArrayList;

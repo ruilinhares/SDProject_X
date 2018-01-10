@@ -1,13 +1,16 @@
 package RMI;
 import java.io.*;
-import RMI.Classes.*;
-import RMI.TCP.*;
+import RMI.source.Classes.*;
+import RMI.source.TCP.*;
 
 import java.net.*;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.*;
+import java.sql.SQLOutput;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements, TCPserverRMIimplements, RMIinterface {
@@ -25,15 +28,34 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
     private RMIserver() throws RemoteException {
         super();
         this.users = new HashMap<String, String>();
-        this.users.put("ze","123");
-        this.users.put("rui","rui");
         this.onlineUsers = new ArrayList<>();
         this.listaEleicoes = new ArrayList<>();
         this.listaDepartamentos = new ArrayList<>();
-        listaDepartamentos.add(new Departamento("dei",new ArrayList<>()));
         this.listaPessoas = new ArrayList<>();
         this.mesasVotos = new ArrayList<>();
-        //start();
+        
+        start();
+        for (Pessoa p:listaPessoas){
+            System.out.println(p.getNumeroUC());
+            System.out.println(p.getPassword());
+            this.users.put(p.getNumeroUC(),p.getPassword());
+        }
+        for (Departamento p:listaDepartamentos){
+            System.out.println(p.getNome());
+        }
+        Calendar inicio = Calendar.getInstance();
+        SimpleDateFormat inif = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        try {
+            inicio.setTime(inif.parse("12-01-2018 18:20"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        listaEleicoes.get(0).setInicio(inicio);
+        for (Eleicao e:listaEleicoes)
+            e.Print();
+
+
     }
     /*
     public boolean connectToFacebookAccount(String user, String code) throws RemoteException {
@@ -68,20 +90,23 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
     }
 
     public ArrayList<String> getAllUsers() throws RemoteException {
+        System.out.println("Looking up all users...");
         return new ArrayList<String>(users.keySet());
     }
 
     public boolean addListaCandidata(String titulo, String lista) throws  RemoteException{
         for (Eleicao aux : listaEleicoes){
-            if (aux.getTitulo().toUpperCase().equals(lista.toUpperCase())) {
+            if (aux.getTitulo().toUpperCase().equals(titulo.toUpperCase())) {
                 aux.addListaCandidata(new ListaCandidata(lista));
+                System.out.println("done");
+                store();
                 return true;
             }
         }
         return false;
     }
-
-    public ArrayList<String> getEleicoesDisponiveis(String user){
+    
+     public ArrayList<String> getEleicoesDisponiveis(String user){
         ArrayList<String> lista = new ArrayList<>();
         for (Eleicao ele : listaEleicoes)
             if (ele.verificaVotacao())
@@ -114,7 +139,7 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         return false;
     }
 
-
+    
 //#############################################################################
     synchronized public ArrayList<Eleicao> getListaEleicoes()  {
         return listaEleicoes;
@@ -199,7 +224,7 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         store();
     }
 
-    @Override
+     @Override
     synchronized public void RemoveEleicao(int i){
         this.listaEleicoes.remove(i);
         store();
@@ -239,10 +264,10 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
 
     // Ponto 6 IDENTIFICAR UM ELEITOR
     @Override
-    synchronized public Pessoa identificarEleitor(String numerocc) throws RemoteException{
+    synchronized public Pessoa identificarEleitor(String numerouc) throws RemoteException{
 
         for (Pessoa pessoa: this.listaPessoas)
-            if (pessoa.getNumeroCC().equals(numerocc))
+            if (pessoa.getNumeroUC().equals(numerouc))
                 return pessoa;
         return null;
     }
@@ -315,7 +340,7 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
             new Thread(new UDPServer()).start();
             }
 
-//---Base-Dados---------------------------------------------
+//---Base-DadosAction---------------------------------------------
 
     public void start() {
         ObjectInputStream objectinputstream1 = null;

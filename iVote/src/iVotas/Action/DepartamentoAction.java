@@ -18,17 +18,9 @@ public class DepartamentoAction extends Action {
             if (this.getiVotasBean().apagaDep(depnomeA))
                 return SUCCESS;
         }
-        return LOGIN;
+        return ERROR;
     }
 
-    public String executeApaga() throws RemoteException{
-        if(depnomeA!=null && !depnomeA.equals("")){
-            System.out.println(depnomeA);
-            if (this.getiVotasBean().apagaDep(depnomeA))
-                return SUCCESS;
-        }
-        return LOGIN;
-    }
 
     public String getDepnomeC() {
         return depnomeC;
