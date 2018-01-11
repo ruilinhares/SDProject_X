@@ -101,6 +101,15 @@ public class iVotasBean extends UnicastRemoteObject {
         return true;
     }
 
+
+    public boolean altera(String uc ,String nome,String morada,String telemovel, String val,String pass,String cc){
+        try{
+            return this.serverRMI.AlteraPessoa(uc ,nome,morada,telemovel,val,pass,cc);
+        }catch (RemoteException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     public boolean apagaDep(String nomeDep){
         ArrayList<Departamento> departamentos = null;
         try {

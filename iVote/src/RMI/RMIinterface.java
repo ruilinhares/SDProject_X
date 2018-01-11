@@ -8,8 +8,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface RMIinterface extends Remote {
-
-
+    public boolean AlteraPessoa(String uc ,String nome,String morada,String telemovel, String val,String pass,String cc) throws RemoteException;
     boolean logged(String user) throws RemoteException;
     boolean userLogin(String name, String password) throws RemoteException;
     void logout(String user) throws RemoteException;

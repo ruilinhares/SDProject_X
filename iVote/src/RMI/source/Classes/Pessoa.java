@@ -123,6 +123,39 @@ public abstract class Pessoa implements Serializable {
         return NumeroCC;
     }
 
+
+    public void setNome(String nome) {
+        Nome = nome;
+    }
+
+    public void setNumeroUC(String numeroUC) {
+        NumeroUC = numeroUC;
+    }
+
+    public void setTelemovel(String telemovel) {
+        Telemovel = telemovel;
+    }
+
+    public void setMorada(String morada) {
+        Morada = morada;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public void setDepartamento(RMI.source.Classes.Departamento departamento) {
+        Departamento = departamento;
+    }
+
+    public void setNumeroCC(String numeroCC) {
+        NumeroCC = numeroCC;
+    }
+
+    public void setValidade(String validade) {
+        Validade = validade;
+    }
+
     /**
      *Método que permite obter a validade do cartao de cidadao do utilizador.
      * @return Validade do cartao de cidadao.

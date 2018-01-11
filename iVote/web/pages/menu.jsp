@@ -132,6 +132,9 @@
         <form action="button11.action">
             <button>11.Associar Mesa</button>
         </form>
+        <form action="button12.action">
+            <button>12.Alterar Dados Pessoais</button>
+        </form>
         
         <br><br>
         <form action="logout.action">

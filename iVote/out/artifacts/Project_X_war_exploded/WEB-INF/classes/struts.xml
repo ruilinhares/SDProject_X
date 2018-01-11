@@ -145,6 +145,13 @@
 
         </action>
 
+        <action name="button12">
+            <interceptor-ref name="loginStack" />
+            <result>/pages/alterar.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
+        </action>
+
 
 
        	<!-- 'registar' action calls 'execute' in 'RegistarAction' -->
@@ -201,7 +208,7 @@
             <result name="login">/pages/listaCandidata.jsp</result>
         </action>
 
-		<action name="gerirmesas" class="iVotas.Action.ListaCandidataAction" method="execute">
+		<action name="gerirmesas" class="iVotas.Action.GerirMesasAction" method="execute">
             <interceptor-ref name="loginStack" />
 
             <result name="success">/pages/menu.jsp</result>
@@ -220,7 +227,13 @@
             <interceptor-ref name="loginStack" />
             <result name="success">/pages/localVoto.jsp</result>
             <result name="login" type="redirect">/index.jsp</result>
+        </action>
 
+        <action name="alterar" class="iVotas.Action.Altera" method="execute">
+            <interceptor-ref name="loginStack" />
+            <result name="success">/pages/menu.jsp</result>
+            <result name="error">/pages/alterar.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
         </action>
 
         <action name="associar" class="iVotas.Action.AssociarAction" method="execute">

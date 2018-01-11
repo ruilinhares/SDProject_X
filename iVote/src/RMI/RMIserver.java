@@ -37,6 +37,7 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         start();
         for (Pessoa p:listaPessoas){
             System.out.println(p.getNumeroUC());
+            System.out.println(p.getNumeroCC());
             System.out.println(p.getPassword());
             this.users.put(p.getNumeroUC(),p.getPassword());
         }
@@ -50,7 +51,7 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        listaEleicoes.get(0).setInicio(inicio);
+        //listaEleicoes.get(0).setInicio(inicio);
         for (Eleicao e:listaEleicoes){
             e.Print();
 
@@ -100,7 +101,6 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         for (Eleicao aux : listaEleicoes){
             if (aux.getTitulo().toUpperCase().equals(titulo.toUpperCase())) {
                 aux.addListaCandidata(new ListaCandidata(lista));
-                System.out.println("done");
                 store();
                 return true;
             }
@@ -131,7 +131,6 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
             if (eleicao.equals(ele.getTitulo())){
                 for (Pessoa p : ele.getListaEleitores()){
                     if (user.equals(p.getNumeroUC())){
-                        System.out.println("merda");
                         Voto voto = new Voto(p, new ListaCandidata(lista),null);
                         //ele.removeEleitor(voto);
                         ele.addVoto(voto);
@@ -297,6 +296,32 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
     synchronized public void AddMesa(TCPServer mesa){
         mesasVotos.add(mesa);
         store();
+    }
+
+    synchronized public boolean AlteraPessoa(String uc ,String nome,String morada,String telemovel, String val,String pass,String cc){
+        for (Pessoa p:listaPessoas){
+            if (p.getNumeroUC().equals(uc)){
+                  if (nome!=null)
+                      p.setNome(nome);
+                  if (morada!=null)
+                      p.setMorada(morada);
+                  if (telemovel!=null)
+                      p.setTelemovel(telemovel);
+                  if (val!=null)
+                      p.setValidade(val);
+                  if (pass!=null){
+                      p.setPassword(pass);
+                      this.users=new HashMap<String, String>();
+                      this.users.put(p.getNumeroUC(),p.getPassword());
+                  }
+                  if (cc!=null)
+                      p.setNumeroCC(cc);
+                  store();
+                  return true;
+          }
+
+        }
+        return false;
     }
 
     @Override
