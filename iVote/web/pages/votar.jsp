@@ -37,6 +37,7 @@
         width: 100%;
     }
 
+
     button:hover {
         opacity: 0.8;
     }
@@ -46,6 +47,10 @@
         font-family:helvetica;
     }
 
+    .title{
+        text-align:center;
+        font-size: 40px;
+    }
 	.cancelbtn {
         width: auto;
         padding: 10px 18px;
@@ -70,25 +75,31 @@
     <img src="../assets/image.png" alt="Avatar" class="avatar">
 </div>
 <div class="container">
-    <h2>Votar</h2>
+
     <form action="listareleicoes.action" method="post">
+        <label class="title"><b>Votar</b></label>
         <br/>
-        <label><b><br/>Lista de Eleicões disponiveis: </b></label>
+        <label><b><br/>Lista de Eleicões disponiveis:<br/></b></label>
         <s:textarea value="%{listaeleicoes}" cols="50" rows="30" disabled="true"/>
-        <s:submit value="ver eleições"/>
+        <br/>
+        <button type="submit">Ver Eleições</button>
     </form>
     <form action="listarcandidatos.action" method="post">
+        <label><b>Insira o título da eleição:</b></label>
         <s:textfield name="eleicao" label="Nome da Eleição"/>
         <br>
         <label><b>Lista de Candidatos</b></label>
+        <br>
         <s:textarea value="%{listacandidatos}" cols="50" rows="30" disabled="true"/>
+        <br>
         <button type="submit">Ver Listas Candidatas</button>
 
     </form>
     <form action="votar.action">
-        <label><b><br/>Lista de Eleicões disponiveis: </b></label>
-        <s:textfield name="eleicao" label="Eleição para para votar: "/>
-        <s:textfield name="lista" label="Lista a votar: "/>
+        <label><b>Insira o título da eleição:</b></label>
+        <s:textfield name="eleicao" required="true"/>
+        <label><b>Insira o nome da lista:</b></label>
+        <s:textfield name="lista" required="true"/>
         <button type="submit">Vota</button>
     </form>
     <form action="logout.action">

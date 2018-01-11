@@ -1,10 +1,11 @@
 package iVotas.Action;
 
 import RMI.source.Classes.*;
+import org.apache.struts2.interceptor.SessionAware;
 
 import java.rmi.RemoteException;
 
-public class RegistarAction extends Action{
+public class RegistarAction extends Action implements SessionAware{
     private static final long serialVersionUID = 4L;
 
     private String uc = null;

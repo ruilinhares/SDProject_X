@@ -1,9 +1,11 @@
 package iVotas.Action;
 
+import org.apache.struts2.interceptor.SessionAware;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class VotarAction extends Action {
+public class VotarAction extends Action implements SessionAware {
 
     private String listaeleicoes = "";
     private String listacandidatos = "";
@@ -12,16 +14,6 @@ public class VotarAction extends Action {
     private String eleicao = null;
     private String lista = null;
 
-    public VotarAction() throws Exception {
-        ArrayList<String> auxeleicoes = new ArrayList<>();
-        auxeleicoes = this.getiVotasBean().getEleicoes();
-        if (!auxeleicoes.isEmpty()){
-            for (String ele : auxeleicoes)
-                listaeleicoes += ele +"\n";
-        }
-        else
-            eleicao = "*Sem eleições para votar*";
-    }
 
     public String comboCandidatos() throws Exception {
         ArrayList<String> auxlistas = new ArrayList<>();

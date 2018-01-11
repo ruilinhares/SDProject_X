@@ -103,6 +103,7 @@ public class Nucleo extends Eleicao implements Serializable {
         for (Pessoa p:listaEleitores)
             if (voto.getEleitor().getNumeroCC().equals(p.getNumeroCC())){
                 listaEleitores.remove(p);
+                return;
             }
     }
 

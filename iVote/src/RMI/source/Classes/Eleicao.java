@@ -12,7 +12,7 @@ public abstract class Eleicao implements Serializable {
     String Descricao;
     Calendar inicio;
     Calendar fim;
-
+    ArrayList<Pessoa> listaEleitores;
     /**
      * Construtor vazio da classe.
      */
@@ -79,6 +79,10 @@ public abstract class Eleicao implements Serializable {
      */
     public void setInicio(Calendar inicio) {
         this.inicio = inicio;
+    }
+
+    public void setListaEleitores(ArrayList<Pessoa> listaEleitores) {
+        this.listaEleitores = listaEleitores;
     }
 
     /**

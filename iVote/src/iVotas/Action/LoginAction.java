@@ -7,7 +7,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.rmi.RemoteException;
 import java.util.Map;
 
-public class LoginAction extends Action {
+public class LoginAction extends Action implements SessionAware{
 
     private static final long serialVersionUID = 4L;
     private String username = null;
@@ -23,6 +23,8 @@ public class LoginAction extends Action {
                 this.session.put("loggedin", true);
                 return SUCCESS;
             } else if(this.username.equals("admin") && this.password.equals("admin")){
+                this.session.put("username", this.username);
+                this.session.put("loggedin", true);
                 return "administrador";
             }
         }

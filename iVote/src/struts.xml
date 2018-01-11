@@ -11,6 +11,15 @@
 
     <package name="iVotas" extends="struts-default">
 
+        <interceptors>
+            <interceptor class="iVotas.interceptor.LoginInterceptor" name="loginInterceptor">
+            </interceptor>
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="loginInterceptor" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+
         <default-action-ref name="index" />
 
         <global-results>
@@ -30,16 +39,19 @@
         <!-- 'login' action calls 'execute' in 'LoginAction' -->
         <action name="login" class="iVotas.Action.LoginAction" method="execute">
             <result name="success" type="redirect">/pages/votar.jsp</result>
-            <result name="login">/index.jsp</result>
             <result name="administrador" type="redirect">/pages/menu.jsp</result>
         </action>
 
-        <action name="listareleicoes" class="iVotas.Action.VotarAction">
+        <action name="listareleicoes" class="iVotas.Action.VotarEleicoesAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result>/pages/votar.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
         </action>
 
         <action name="listarcandidatos" class="iVotas.Action.VotarAction" method="comboCandidatos">
+            <interceptor-ref name="loginStack" />
             <result name="none">/pages/votar.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
         </action>
 
 
@@ -58,106 +70,165 @@
         </action>
 
         <action name="button1">
+            <interceptor-ref name="loginStack" />
             <result>/pages/registar.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
         <action name="button2">
+            <interceptor-ref name="loginStack" />
             <result>/pages/gerirDep.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
         </action>
 
         <action name="button3">
+            <interceptor-ref name="loginStack" />
             <result>/pages/criarEleicao.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
         <action name="button4">
+            <interceptor-ref name="loginStack" />
             <result>/pages/dadosEle.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
 		<action name="button5">
+            <interceptor-ref name="loginStack" />
             <result>/pages/listaCandidata.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
 		<action name="button6">
+            <interceptor-ref name="loginStack" />
             <result>/pages/gerirMesas.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
         <action name="button7">
+            <interceptor-ref name="loginStack" />
             <result>/pages/alterarEle.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
 		 <action name="button8">
+             <interceptor-ref name="loginStack" />
             <result>/pages/localVoto.jsp</result>
-        </action>
+             <result name="login" type="redirect">/index.jsp</result>
+
+         </action>
 
         <action name="button9">
+            <interceptor-ref name="loginStack" />
             <result>/pages/estadoMesas.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
         <action name="button10">
+            <interceptor-ref name="loginStack" />
             <result>/pages/dadosPas.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
         <action name="button11">
+            <interceptor-ref name="loginStack" />
             <result>/pages/associarMesa.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
 
 
        	<!-- 'registar' action calls 'execute' in 'RegistarAction' -->
         <action name="registar" class="iVotas.Action.RegistarAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/menu.jsp</result>
             <result name="error">/pages/registar.jsp</result>
-            <result name="login">/index.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
         </action>
 
         <!-- 'gerirDep' action calls 'execute' in 'DepartamentoAction' -->
         <action name="departamento" class="iVotas.Action.DepartamentoAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/menu.jsp</result>
             <result name="error">/pages/gerirDep.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
         <action name="criarEle" class="iVotas.Action.CriaEleicaoAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/menu.jsp</result>
             <result name="error">/pages/criarEleicao.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
         <action name="dados" class="iVotas.Action.DadosAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/dadosEle.jsp</result>
             <result name="error">/pages/dadosEle.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
         <action name="dadosPassados" class="iVotas.Action.DadosPassadosAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/dadosPas.jsp</result>
             <result name="error">/pages/dadosPas.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
         </action>
 
         <action name="alteraEle" class="iVotas.Action.AlteraEleicaoAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/menu.jsp</result>
             <result name="error">/pages/alterarEle.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
 		<action name="lista" class="iVotas.Action.ListaCandidataAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/menu.jsp</result>
             <result name="login">/pages/listaCandidata.jsp</result>
         </action>
 
 		<action name="gerirmesas" class="iVotas.Action.ListaCandidataAction" method="execute">
+            <interceptor-ref name="loginStack" />
+
             <result name="success">/pages/menu.jsp</result>
             <result name="login">/pages/gerirMesas.jsp</result>
         </action>
 
         <action name="votar" class="iVotas.Action.VotarAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/votar.jsp</result>
-            <result name="error">/pages/votar.jsp</result>
+            <result name="error">/pages/error.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
 		<action name="localvoto" class="iVotas.Action.VotolocalAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/localVoto.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
         <action name="associar" class="iVotas.Action.AssociarAction" method="execute">
+            <interceptor-ref name="loginStack" />
             <result name="success">/pages/menu.jsp</result>
             <result name="error">/pages/associarMesa.jsp</result>
+            <result name="login" type="redirect">/index.jsp</result>
+
         </action>
 
 

@@ -46,14 +46,16 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
         Calendar inicio = Calendar.getInstance();
         SimpleDateFormat inif = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         try {
-            inicio.setTime(inif.parse("12-01-2018 18:20"));
+            inicio.setTime(inif.parse("10-01-2018 18:20"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         listaEleicoes.get(0).setInicio(inicio);
-        for (Eleicao e:listaEleicoes)
+        for (Eleicao e:listaEleicoes){
             e.Print();
+
+        }
+
 
 
     }
@@ -129,9 +131,11 @@ public class RMIserver extends UnicastRemoteObject implements AdminRMIimplements
             if (eleicao.equals(ele.getTitulo())){
                 for (Pessoa p : ele.getListaEleitores()){
                     if (user.equals(p.getNumeroUC())){
+                        System.out.println("merda");
                         Voto voto = new Voto(p, new ListaCandidata(lista),null);
-                        ele.removeEleitor(voto);
+                        //ele.removeEleitor(voto);
                         ele.addVoto(voto);
+                        store();
                         return true;
                     }
                 }

@@ -22,7 +22,7 @@
 
         <div class="container">
             <label><b>Username</b></label>
-            <s:textfield name="username"/>
+            <s:textfield name="username" />
 
             <label><b>Password</b></label>
             <s:textfield type="password" name="password" />
